@@ -1,21 +1,12 @@
 #!/bin/bash
-CONFIG="$1"
-COMMAND="$2"
 
-# reload is allowed
-if [ "$COMMAND" == "reload" ] || [ "$COMMAND" == "restart" ]
-then
-    # Move the current execution state to the proper directory
-    cd /etc/apache2/sites-available
+# Move the current execution state to the proper directory
+cd /etc/apache2/sites-available
 
-    # Disable a vhost configuration
-    sudo a2dissite "$CONFIG"
-    sudo service apache2 "$COMMAND"
+# Disable a vhost configuration
+sudo a2dissite *
+sudo service apache2 restart
 
-    # Enable a vhost configuration
-    sudo a2ensite "$CONFIG"
-    sudo service apache2 "$COMMAND"
-else
-    echo "ERROR: $COMMAND is an invalid service command {restart|reload}"
-    exit 1
-fi
+# Enable a vhost configuration
+sudo a2ensite *
+sudo service apache2 restart
