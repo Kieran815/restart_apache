@@ -1,5 +1,5 @@
 # restart_apache
-BASH script to restart apache
+BASH script to restart apache server
 
 ## Usage
 Clone the repository or download the latest release. 
