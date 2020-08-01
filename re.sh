@@ -1,38 +1,82 @@
 #!/bin/bash
 
-CONFIG="$1"
-COMMAND="$2"
+## ./re.sh attempt 2
 
-VHOSTS_PATH=/etc/apache2/sites-available/*.conf
+# move to proper directory
+cd /etc/apache2/sites-available
+
+# disable vhost config
+sudo a2dissite *
+sudo service apache2 restart
+
+# enable vhost config
+sudo a2ensite *
+sudo service apache2 restart
 
 
-# only allow reload or restart.
-if [ "$COMMAND" == "reload" ] || [ "$COMMAND" == "restart" ]
-then
-    if ["$CONFIG" === "$VHOST_PATH[@]"]
-    then
-        # Move the current execution state to the proper directory
-        cd /etc/apache2/sites-available
 
-        # Disable a vhost configuration
-        sudo a2dissite "$CONFIG"
-        sudo service apache2 "$COMMAND"
 
-        # Enable a vhost configuration
-        sudo a2ensite "$CONFIG"
-        sudo service apache2 "$COMMAND"
-    else
-        echo "ERROR: "$CONFIG" is not a working config file. Please select from the following:"
-        for FILENAME in $VHOSTS_PATH
-        do
-        echo $FILENAME
-        done
-        exit 1
-    fi
-else
-    echo "ERROR: $0 requires two paramters {virtual-host} {restart|reload}"
-    exit 1
-fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ./re.sh attempt one. Works, but not fully. Redoing exercise (above script) for understanding after completing Traversy Media basic script tutorial
+
+
+# CONFIG="$1"
+# COMMAND="$2"
+
+# VHOSTS_PATH=/etc/apache2/sites-available/*.conf
+
+
+# # only allow reload or restart.
+# if [ "$COMMAND" == "reload" ] || [ "$COMMAND" == "restart" ]
+# then
+#     if ["$CONFIG" === "$VHOST_PATH[@]"]
+#     then
+#         # Move the current execution state to the proper directory
+#         cd /etc/apache2/sites-available
+
+#         # Disable a vhost configuration
+#         sudo a2dissite "$CONFIG"
+#         sudo service apache2 "$COMMAND"
+
+#         # Enable a vhost configuration
+#         sudo a2ensite "$CONFIG"
+#         sudo service apache2 "$COMMAND"
+#     else
+#         echo "ERROR: "$CONFIG" is not a working config file. Please select from the following:"
+#         for FILENAME in $VHOSTS_PATH
+#         do
+#         echo $FILENAME
+#         done
+#         exit 1
+#     fi
+# else
+#     echo "ERROR: $0 requires two paramters {virtual-host} {restart|reload}"
+#     exit 1
+# fi
 
 # Update the re.sh script such that
 
